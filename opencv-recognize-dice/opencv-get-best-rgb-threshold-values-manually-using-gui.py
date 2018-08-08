@@ -4,8 +4,8 @@ import cv2
 import numpy as np
 
 
-image = cv2.imread('dices (2).jpg')
-image = cv2.resize(image, (0,0), fx=0.3, fy=0.3)
+image = cv2.imread('images/dices (2).jpg')
+image = cv2.resize(image, (0,0), fx=0.2, fy=0.2)
 hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
 def nothing(x):
