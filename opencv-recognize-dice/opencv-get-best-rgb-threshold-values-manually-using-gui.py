@@ -4,8 +4,8 @@ import cv2
 import numpy as np
 
 
-image = cv2.imread('images/image 8.jpg')
-image = image[:, 147:612]
+image = cv2.imread('pics_3_/image 3(2).jpg')
+image = image[:, 154:601]
 image = cv2.resize(image, (0,0), fx=1.0, fy=1.0)
 rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
