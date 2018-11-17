@@ -4,9 +4,10 @@ import cv2
 import numpy as np
 
 
-image = cv2.imread('images/dices (2).jpg')
-image = cv2.resize(image, (0,0), fx=0.2, fy=0.2)
-hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+image = cv2.imread('images/image 8.jpg')
+image = image[:, 147:612]
+image = cv2.resize(image, (0,0), fx=1.0, fy=1.0)
+rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 def nothing(x):
     pass
@@ -15,35 +16,35 @@ def nothing(x):
 cv2.namedWindow('result')
 
 # Starting with 100's to prevent error while masking
-lower_h, lower_s, lower_v = 100,100,100
-upper_h, upper_s, upper_v = 100,100,100
+lower_r, lower_g, lower_b = 100,100,100
+upper_r, upper_g, upper_b = 100,100,100
 
 
 # Creating lower track bar
-cv2.createTrackbar('lower_h', 'result', 0, 179, nothing)
-cv2.createTrackbar('lower_s', 'result', 0, 255, nothing)
-cv2.createTrackbar('lower_v', 'result', 0, 255, nothing)
+cv2.createTrackbar('lower_r', 'result', 0, 255, nothing)
+cv2.createTrackbar('lower_g', 'result', 0, 255, nothing)
+cv2.createTrackbar('lower_b', 'result', 0, 255, nothing)
 
 # Creating upper track bar
-cv2.createTrackbar('upper_h', 'result', 0, 179, nothing)
-cv2.createTrackbar('upper_s', 'result', 0, 255, nothing)
-cv2.createTrackbar('upper_v', 'result', 0, 255, nothing)
+cv2.createTrackbar('upper_r', 'result', 0, 255, nothing)
+cv2.createTrackbar('upper_g', 'result', 0, 255, nothing)
+cv2.createTrackbar('upper_b', 'result', 0, 255, nothing)
 
 while(1):
     # get info from track bar and appy to result
-    lower_h = cv2.getTrackbarPos('lower_h', 'result')
-    lower_s = cv2.getTrackbarPos('lower_s', 'result')
-    lower_v = cv2.getTrackbarPos('lower_v', 'result')
+    lower_r = cv2.getTrackbarPos('lower_r', 'result')
+    lower_g = cv2.getTrackbarPos('lower_g', 'result')
+    lower_b = cv2.getTrackbarPos('lower_b', 'result')
 
-    upper_h = cv2.getTrackbarPos('upper_h', 'result')
-    upper_s = cv2.getTrackbarPos('upper_s', 'result')
-    upper_v = cv2.getTrackbarPos('upper_v', 'result')
+    upper_r = cv2.getTrackbarPos('upper_r', 'result')
+    upper_g = cv2.getTrackbarPos('upper_g', 'result')
+    upper_b = cv2.getTrackbarPos('upper_b', 'result')
 
     # Normal masking algorithm
-    lower = np.array([lower_h, lower_s, lower_v])   
-    upper = np.array([upper_h, upper_s, upper_v])
+    lower = np.array([lower_r, lower_g, lower_b])   # normally 0,0,0
+    upper = np.array([upper_r, upper_g, upper_b])
 
-    mask = cv2.inRange(hsv, lower, upper)
+    mask = cv2.inRange(rgb, lower, upper)
 
     # result = cv2.bitwise_and(image, image, mask=mask)
 
